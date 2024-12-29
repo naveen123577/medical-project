@@ -1,0 +1,38 @@
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: space-around;
+    padding: 20px;
+}
+
+.card {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    overflow: hidden;
+    width: 300px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+.card-img-top{
+    width: 200px;
+    height: 200px;
+
+}
+
+.card img {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+}
+
+.card-info {
+    padding: 20px;
+}
+
+.card-info h2 {
+    margin: 0;
+}
+
+.card-info p {
+    margin: 10px 0;
+    color: #666;
+}

@@ -1,0 +1,95 @@
+{% load static %}
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+    <title>Medical Store</title>
+</head>
+
+<body>
+
+<br>
+
+<!-- #### Navbar ### -->
+<nav class="navbar navbar-expand-lg bg-body-tertiary fixed-top">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">Medical Equipment Reselling Store</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <br>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="#">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'medical:rentorder' %}">Rented Items</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'medical:specificorder' %}">Orders</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'medical:logout1' %}">Logout</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'medical:feedback' %}">Feedback</a>
+                </li>
+                <li class="nav-item">
+                    <form class="form-inline" action="" method="post">
+                        {% csrf_token %}
+                        <input class="form-control mr-sm-2" type="text" placeholder="Search..." name="search1">
+                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                    </form>
+
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<br>
+<div class="container mt-5">
+    <div class="row">
+        {% for m in data2 %}
+            <div class="col-md-4">
+                <div class="card" style="height:580px">
+                    <img src="{{m.pim.url}}" class="card-img-top" alt="..."
+                         style="width:200px;height:200px;margin-top:50px;margin-left:70px;">
+                <form method="get" action="/your_form_action_url/">
+                    <div class="card-body">
+                        <h5 class="card-title">{{m.pnm}}</h5>
+                        <input type="text"value="{{m.pnm}}"name="pname"hidden>
+                        <p class="card-text">$ {{m.prc}}</p>
+                        <input type="text"value="{{m.prc}}"name="pprice"hidden>
+                        <p class="card-text">Seller : {{m.seller}}</p>
+                        <input type="text"value="{{m.seller}}"name="pseller"hidden>
+                        <p class="card-text"><small class="text-muted">{{m.des}}</small></p>
+                        <input type="text"value="{{m.des}}"name="pdes"hidden>
+                        <p class="card-text"><small class="text-muted">Rent: $ {{m.rentprice}}/month</small></p>
+
+                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit"><a href="/payment?idn={{m.id}}">Buy</a></button>
+                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit"><a href="/rentdate?ids={{m.id}}">Rent</a></button>
+
+                    </div>
+                </form>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+</body>
+
+</html>

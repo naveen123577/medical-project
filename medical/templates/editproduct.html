@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Edit User</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-header">
+          <h5 class="card-title">Edit Item</h5>
+        </div>
+        <div class="card-body">
+          <!-- Begin Form -->
+          <form action="{% url 'vendor:updateproduct' %}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {% for m in secdata %}
+            <div class="form-group">
+              <label for="userName"> Product Name</label>
+              <input type="text" class="form-control" id="userName" value="{{m.pnm}}" name="pname" required>
+              <input type="hidden" value="{{m.id}}" name="idno">
+            </div>
+            <div class="form-group">
+              <label for="userMobile">Quantity</label>
+              <input type="text" class="form-control" id="userMobile" value="{{m.quantity}}" name="quantiti" required>
+            </div>
+
+            <div class="form-group">
+              <label for="userMobile">Price</label>
+              <input type="text" class="form-control" id="userMobile" value="{{m.prc}}" name="pprice" required>
+            </div>
+
+            <div class="form-group">
+              <label for="userEmail">Description</label>
+              <input type="text" class="form-control" id="userEmail" value="{{m.des}}" name="pdes" required>
+            </div>
+
+            <div class="form-group">
+              <!-- <label for="userPassword">Seller</label> -->
+              <input type="text" class="form-control" id="userPassword" value="{{m.seller}}" name="pseller" hidden>
+            </div>
+
+            <div class="form-group">
+                <label for="userPassword">Rent Price</label>
+                <input type="text" class="form-control" id="userPassword" value="{{m.rentprice}}" name="prent" required>
+              </div>
+  
+            <div class="form-group">
+                <label class="form-label" for="customFile">Default file input example</label>
+                <input type="file" name="pimage1" class="form-control" id="customFile" />            
+            </div>            
+  
+            <button class="btn btn-primary" type="submit">Update</button>
+            {% endfor %}
+          </form>
+          <!-- End Form -->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Bootstrap JS and Popper.js -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.7/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>

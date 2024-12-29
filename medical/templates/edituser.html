@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Edit User</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-header">
+          <h5 class="card-title">Edit User</h5>
+        </div>
+        <div class="card-body">
+          <!-- Begin Form -->
+          <form action="{% url 'admin1:updates' %}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {% for m in secdata %}
+            <div class="form-group">
+              <label for="userName">Name</label>
+              <input type="text" class="form-control" id="userName" value="{{m.fnm}}" name="uname" required>
+              <input type="hidden" value="{{m.id}}" name="idno">
+            </div>
+
+            <div class="form-group">
+              <label for="userMobile">Mobile</label>
+              <input type="text" class="form-control" id="userMobile" value="{{m.mob}}" name="umobile" required>
+            </div>
+
+            <div class="form-group">
+              <label for="userEmail">Email</label>
+              <input type="text" class="form-control" id="userEmail" value="{{m.eml}}" name="uemail" required>
+            </div>
+
+            <div class="form-group">
+              <label for="userPassword">Password</label>
+              <input type="text" class="form-control" id="userPassword" value="{{m.psw}}" name="upassword" required>
+            </div>
+
+            <button class="btn btn-primary" type="submit">Update</button>
+            {% endfor %}
+          </form>
+          <!-- End Form -->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Bootstrap JS and Popper.js -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.7/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>
